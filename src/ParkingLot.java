@@ -47,6 +47,7 @@ List<List<Slot>> 表示一个包含多个楼层停车位列表的列表，即整
     private String generateTicketId(int flr, int slno){ //通过 generateTicketId(i + 1, j + 1) 生成停车票据ID
         return parkingLotId + "_" + flr + "_" + slno;
     }
+    
     //unPark，getNoOfOpenSlots两个方法结合起来，实现了停车场中车辆的移除和空闲停车位数量的统计功能
     public void unPark(String ticketId){
         String[] extract = ticketId.split("_");//将票据ID按下划线 _ 分割成数组
