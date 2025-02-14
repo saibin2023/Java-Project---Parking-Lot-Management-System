@@ -12,35 +12,36 @@ List<List<Slot>> 表示一个包含多个楼层停车位列表的列表，即整
 */
     ParkingLot(String parkingLotId, int nfloors, int noOfSlotsPerFlr) {
         this.parkingLotId = parkingLotId;
-        slots = new ArrayList<>();
-        for (int i = 0; i < nfloors; i++) {
-            slots.add(new ArrayList<>());
-            List<Slot> floorSlots = slots.get(i);
+        slots = new ArrayList<>();//初始化一个新的 ArrayList，用于存储每层楼的停车位
+        
+        for (int i = 0; i < nfloors; i++) { //循环遍历每一层楼
+            slots.add(new ArrayList<>()); //为每层楼创建一个新的 ArrayList 并添加到 slots 列表中。
+            List<Slot> floorSlots = slots.get(i); //获取当前楼层的停车位列表
             floorSlots.add(new Slot("truck"));
             floorSlots.add(new Slot("bike"));
-            floorSlots.add(new Slot("bike"));
+            floorSlots.add(new Slot("bike")); //依次在当前楼层添加一个类型为 "truck" 的停车位,添加两个类型为 "bike" 的停车位
             for (int j = 3; j < noOfSlotsPerFlr; j++) {
-                slots.get(i).add(new Slot("car"));
+                slots.get(i).add(new Slot("car")); //循环添加剩余的停车位，类型为 "car"
             }
         }
     }
 
     public String parkVehicle(String type, String regNo, String color) {
         Vehicle vehicle = new Vehicle(type, regNo, color);
-        for (int i = 0; i < slots.size(); i++) {
-            for (int j = 0; j < slots.get(i).size(); j++) {
-                Slot slot = slots.get(i).get(j);
-                if (slot.type == type && slot.vehicle == null) {
-                    slot.vehicle = vehicle;
-                    slot.ticketId = generateTicketId(i + 1, j + 1);
+        for (int i = 0; i < slots.size(); i++) { //外层循环，遍历每层楼的停车位列表。
+            for (int j = 0; j < slots.get(i).size(); j++) { //内层循环，遍历当前楼层的每个停车位。
+                Slot slot = slots.get(i).get(j); //获取当前停车位
+                if (slot.type == type && slot.vehicle == null) { //检查停车位的类型是否与车辆类型匹配，并且停车位是否为空
+                    slot.vehicle = vehicle; //将车辆停放在停车位上
+                    slot.ticketId = generateTicketId(i + 1, j + 1);//生成停车票据ID，并赋值给停车位
                     return slot.ticketId;
                 }
             }
         }
-        System.out.println("NO slot available for given type");
+        System.out.println("NO slot available for given type"); //没有找到合适的停车位
         return null;
     }
-    private String generateTicketId(int flr, int slno){
+    private String generateTicketId(int flr, int slno){ //通过 generateTicketId(i + 1, j + 1) 生成停车票据ID
         return parkingLotId + "_" + flr + "_" + slno;
     }
     public void unPark(String ticketId){
