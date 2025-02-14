@@ -1,4 +1,4 @@
-# Java-Project---Parking-Lot-Management-System
+# Java-Project--Parking-Lot-Management-System
 Java Project – How to Build a Simple Parking Lot Management System from Kunal Nalawade
 
 https://www.freecodecamp.org/news/java-project-parking-lot-management-system/
