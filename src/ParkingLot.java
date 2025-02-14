@@ -4,7 +4,12 @@ import java.util.List;
 public class ParkingLot {
     String parkingLotId;
     List<List<Slot>> slots;
-
+/* 
+List<List<Slot>> slots; 代表一个二维列表（或称为列表的列表），用于存储停车场中所有楼层的停车位信息。
+List<Slot> 表示一个停车位列表，每个列表包含一个楼层的所有停车位。
+List<List<Slot>> 表示一个包含多个楼层停车位列表的列表，即整个停车场的所有停车位。
+具体来说，每个 List<Slot> 对应一个楼层，而 slots 则包含了所有楼层的停车位列表。
+*/
     ParkingLot(String parkingLotId, int nfloors, int noOfSlotsPerFlr) {
         this.parkingLotId = parkingLotId;
         slots = new ArrayList<>();
